@@ -1,0 +1,14 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: k8s-fluxcd-simple
+  namespace: flux-system
+spec:
+  interval: 2m0s
+  path: ./simple
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: k8s-fluxcd-app
+  targetNamespace: fluxcd-app
