@@ -1,6 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: metabase
+namespace: flux-system
 resources:
   - k8s-fluxcd-demo-source.yaml
   - k8s-fluxcd-simple-kustomization.yaml
