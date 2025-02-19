@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "argocd-demo-chart.name" -}}
+{{- define "demo-chart.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "argocd-demo-chart.fullname" -}}
+{{- define "demo-chart.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "argocd-demo-chart.chart" -}}
+{{- define "demo-chart.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "argocd-demo-chart.labels" -}}
-helm.sh/chart: {{ include "argocd-demo-chart.chart" . }}
-{{ include "argocd-demo-chart.selectorLabels" . }}
+{{- define "demo-chart.labels" -}}
+helm.sh/chart: {{ include "demo-chart.chart" . }}
+{{ include "demo-chart.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "argocd-demo-chart.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "argocd-demo-chart.name" . }}
+{{- define "demo-chart.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "demo-chart.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "argocd-demo-chart.serviceAccountName" -}}
+{{- define "demo-chart.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "argocd-demo-chart.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "demo-chart.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
